@@ -2,7 +2,6 @@ const btn = document.getElementById('btn');
 btn.addEventListener('click', startPromiseChain);
 
 function startPromiseChain() {
-	
     const inputNumber = Number(document.getElementById('ip').value);
     new Promise((resolve, reject) => {
         setTimeout(() => resolve(inputNumber), 2000);
