@@ -1,40 +1,53 @@
-const btn = document.getElementById('btn');
-btn.addEventListener('click', startPromiseChain);
 
-function startPromiseChain() {
-    const inputNumber = Number(document.getElementById('ip').value);
-    new Promise((resolve, reject) => {
-        setTimeout(() => resolve(inputNumber), 2000);
-    })
-    .then(result => {
-        result *= 2;
-        document.getElementById('output').innerText = `Result: ${result}`;
-        return new Promise((resolve, reject) => {
-            setTimeout(() => resolve(result), 1000);
-        });
-    })
-    .then(result => {
-        result -= 3;
-        document.getElementById('output').innerText = `Result: ${result}`;
-        return new Promise((resolve, reject) => {
-            setTimeout(() => resolve(result), 1000);
-        });
-    })
-    .then(result => {
-        result /= 2;
-        document.getElementById('output').innerText = `Result: ${result}`;
-        return new Promise((resolve, reject) => {
-            setTimeout(() => resolve(result), 1000);
-        });
-    })
-    .then(result => {
-        result += 10;
-        document.getElementById('output').innerText = `Final Result: ${result}`;
-        return new Promise((resolve, reject) => {
-            setTimeout(() => resolve(result), 1000);
-        });
-    })
-    .catch(error => {
-        console.error('An error occurred:', error);
-    });
+
+const btn = document.getElementById('btn');
+const output = document.getElementById('output');
+
+
+function result(){
+	const numberInput = Number(document.getElementById('ip').value);
+	// alert(numberInput)
+	new Promise((resolve, reject)=>{
+		setTimeout(()=>{
+			output.textContent= `Result: ${numberInput}`
+			resolve(numberInput) 
+		},2000)
+	}).then((numberInput)=>{
+		return new Promise((resolve, reject)=>{
+           setTimeout(()=>{
+			let multiplay = 2*numberInput
+			   // alert(multiplay)
+			output.textContent = `Result: ${multiplay}`
+			resolve(multiplay)
+		},1000)
+		})
+	}).then((multiplay)=>{
+		return new Promise((resolve, reject)=>{
+			 setTimeout(()=>{
+				 let subtracts = multiplay - 3;
+				 // alert(subtracts)
+				 output.textContent = `Result: ${subtracts}`
+			     resolve(subtracts)
+			 },1000)
+		 })
+	}).then((subtracts)=>{
+		return new Promise((resolve, reject)=>{
+			setTimeout(()=>{
+				let divide = subtracts/2;
+				output.textContent = `Result: ${divide}`;
+				resolve(divide);
+			},1000)
+		})
+	}).then((divide)=>{
+		return new Promise((resolve, reject)=>{
+			setTimeout(()=>{
+				let add = divide + 10;
+				output.textContent = `Result: ${add}`
+				resolve(add)
+			},1000)
+		})
+	}).then((add)=>{
+		output.textContent = `Final Result: ${add}`
+	})
+	
 }
