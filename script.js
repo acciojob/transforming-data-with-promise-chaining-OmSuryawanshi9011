@@ -1,10 +1,9 @@
-
-
-const btn = document.getElementById('btn');
+// const btn = document.getElementById('btn');
 const output = document.getElementById('output');
 
 
 function result(){
+	
 	const numberInput = Number(document.getElementById('ip').value);
 	// alert(numberInput)
 	new Promise((resolve, reject)=>{
@@ -51,3 +50,5 @@ function result(){
 	})
 	
 }
+
+document.getElementById('btn').addEventListner('click', result());
